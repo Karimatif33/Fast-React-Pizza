@@ -9,14 +9,12 @@
    focus:outline-none focus:ring 
    focus:ring-yellow-400 md:px-6 md:py-3;
   }
-}
-
 /* https://dev.to/afif/i-made-100-css-loaders-for-your-next-project-4eje */
 
 .loader {
   width: 45px;
   aspect-ratio: 0.75;
-  --c: no-repeat linear-gradient(#333 0 0);
+  --c: no-repeat linear-gradient(theme(colors.stone.800) 0 0);
   background:
     var(--c) 0% 50%,
     var(--c) 50% 50%,
@@ -50,4 +48,6 @@
       50% 50%,
       100% 100%;
   }
+}
+
 }
