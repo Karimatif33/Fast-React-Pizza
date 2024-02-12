@@ -2,12 +2,13 @@
 
 import { useLoaderData } from "react-router-dom";
 import { getOrder } from "../../services/apiRestaurant";
+import OrderItem  from "./OrderItem";
+
 import {
   calcMinutesLeft,
   formatCurrency,
   formatDate,
 } from "../../utils/helpers";
-
 
 function Order() {
   const order = useLoaderData();
@@ -24,29 +25,45 @@ function Order() {
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
 
   return (
-    <div>
-      <div>
-        <h2>Status</h2>
+    <div className="space-y-8 px-4 py-6">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h2 className="text-xl font-semibold">
+          Order
+          <span className="rounded-full bg-yellow-500 px-3  font-semibold uppercase text-yellow-50">
+            #{id}
+          </span>
+          Status
+        </h2>
 
-        <div>
-          {priority && <span>Priority</span>}
-          <span>{status} order</span>
+        <div className="space-x-2">
+          {priority && (
+            <span className="rounded-full bg-red-500 px-3 text-sm font-semibold uppercase text-red-50">
+              Priority
+            </span>
+          )}
+          <span className="rounded-full bg-green-500 px-3 text-sm font-semibold uppercase text-green-50">
+            {status} order
+          </span>
         </div>
       </div>
 
-      <div>
-        <p>
+      <div className="flex flex-wrap items-center justify-between gap-2 bg-stone-300 px-6 py-5">
+        <p className="font-medium">
           {deliveryIn >= 0
             ? `Only ${calcMinutesLeft(estimatedDelivery)} minutes left 😃`
             : "Order should have arrived"}
         </p>
-        <p>(Estimated delivery: {formatDate(estimatedDelivery)})</p>
+        <p className="text-xs text-stone-500">
+          (Estimated delivery: {formatDate(estimatedDelivery)})
+        </p>
       </div>
-
-      <div>
-        <p>Price pizza: {formatCurrency(orderPrice)}</p>
-        {priority && <p>Price priority: {formatCurrency(priorityPrice)}</p>}
-        <p>To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}</p>
+<ul className="divide-y divide-stone-300 border-b border-t">
+  {cart.map(item=><OrderItem item={item} key={item.id}/>)}
+</ul>
+      <div className="space-y-2 bg-stone-300 py-5 px-6">
+        <p className="text-sm font medium text-stone-700 ">Price pizza: {formatCurrency(orderPrice)}</p>
+        {priority && <p className="text-sm font medium text-stone-700 ">Price priority: {formatCurrency(priorityPrice)}</p>}
+        <p className="font-bold">To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}</p>
       </div>
     </div>
   );
