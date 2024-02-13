@@ -9,6 +9,7 @@ export default {
     fontFamily: {
       sans: 'Roboto Mono, momospace',
     },
+    
     extend: {},
   },
   plugins: [],
