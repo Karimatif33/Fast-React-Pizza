@@ -58,7 +58,7 @@ function Order() {
         </p>
       </div>
 <ul className="divide-y divide-stone-300 border-b border-t">
-  {cart.map(item=><OrderItem item={item} key={item.id}/>)}
+  {cart.map(item=><OrderItem item={item} key={item.pizzaId}/>)}
 </ul>
       <div className="space-y-2 bg-stone-300 py-5 px-6">
         <p className="text-sm font medium text-stone-700 ">Price pizza: {formatCurrency(orderPrice)}</p>
